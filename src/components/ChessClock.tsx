@@ -22,7 +22,7 @@ export default function ChessClock() {
     useEffect(() => {
         setPlayer1Secs(localStorage.getItem("playersSecs") ? Number(localStorage.getItem("playersSecs")) : 600)
         setPlayer2Secs(localStorage.getItem("playersSecs") ? Number(localStorage.getItem("playersSecs")) : 600)
-    }, [])
+    }, [player1Secs, player2Secs])
 
     useEffect(() => {
         if (turn === "PLAYER1") {
