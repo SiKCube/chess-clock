@@ -3,7 +3,8 @@
 import Button from "./Button"
 import Input from "./Input"
 
-export default function TimeConfigModal({ setShowModal }: { setShowModal: React.Dispatch<React.SetStateAction<boolean>>}) {
+export default function TimeConfigModal({ setShowModal, setPlayer1Secs, setPlayer2Secs }:
+    { setShowModal: React.Dispatch<React.SetStateAction<boolean>>, setPlayer1Secs: React.Dispatch<React.SetStateAction<number>>, setPlayer2Secs: React.Dispatch<React.SetStateAction<number>> }) {
     return (
         <>
             <div
@@ -21,6 +22,9 @@ export default function TimeConfigModal({ setShowModal }: { setShowModal: React.
                         const seg = Number(formData.get("seg"))
 
                         localStorage.setItem("playersSecs", String(min * 60 + seg))
+
+                        setPlayer1Secs(localStorage.getItem("playersSecs") ? Number(localStorage.getItem("playersSecs")) : 600)
+                        setPlayer2Secs(localStorage.getItem("playersSecs") ? Number(localStorage.getItem("playersSecs")) : 600)
 
                         setShowModal(false)
                     }}
