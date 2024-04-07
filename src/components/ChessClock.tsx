@@ -9,8 +9,8 @@ import Button from "./Button"
 import ClockBtn from "./ClockBtn"
 
 export default function ChessClock() {
-    const [player1Secs, setPlayer1Secs] = useState(600)
-    const [player2Secs, setPlayer2Secs] = useState(600)
+    const [player1Secs, setPlayer1Secs] = useState<number>(600)
+    const [player2Secs, setPlayer2Secs] = useState<number>(600)
 
     const [showModal, setShowModal] = useState(false)
 
@@ -18,6 +18,11 @@ export default function ChessClock() {
 
     const classPlayer1 = turn === "PLAYER1" ? null : "opacity-70"
     const classPlayer2 = turn === "PLAYER2" ? null : "opacity-70"
+
+    useEffect(() => {
+        setPlayer1Secs(localStorage.getItem("playersSecs") ? Number(localStorage.getItem("playersSecs")) : 600)
+        setPlayer2Secs(localStorage.getItem("playersSecs") ? Number(localStorage.getItem("playersSecs")) : 600)
+    }, [])
 
     useEffect(() => {
         if (turn === "PLAYER1") {
@@ -39,11 +44,6 @@ export default function ChessClock() {
             return () => clearInterval(interval)
         }
     }, [turn, player1Secs, player2Secs])
-
-    useEffect(() => {
-        setPlayer1Secs(localStorage.getItem("playersSecs") ? Number(localStorage.getItem("playersSecs")) : 600)
-        setPlayer2Secs(localStorage.getItem("playersSecs") ? Number(localStorage.getItem("playersSecs")) : 600)
-    }, [localStorage.getItem("playersSecs")])
 
     return (
         <>
